@@ -1,0 +1,12 @@
+A ser alterado:
+generalização ator funcionário - atendente/gerente
+- Verificar Tickets
+*retirar validar conta*
+- Estoque prêmios
+
+ESSENCIAIS:
+- UTILIZAR FICHAS
+- RECARREGAR FICHAS
+- CADASTRAR NOVOS JOGADORES
+- GERENCIAR MÁQUINAS
+- TROCAR TICKETS POR PRÊMIOS
