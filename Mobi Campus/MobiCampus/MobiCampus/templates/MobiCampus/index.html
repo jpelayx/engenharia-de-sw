@@ -1,0 +1,9 @@
+{% if user_list %}
+    <ul>
+    {% for user in user_list %}
+        <li><a href="/MobiCampus/{{ user.login }}/">{{ user.nome }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Nenhum usuario disponivel.</p>
+{% endif %}

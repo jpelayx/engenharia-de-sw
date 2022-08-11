@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'MobiCampus.apps.MobiCampusConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'MobiCampus.urls'
+ROOT_URLCONF = 'mysite.urls'
 
 TEMPLATES = [
     {
@@ -67,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'MobiCampus.wsgi.application'
+WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
 # Database
