@@ -1,0 +1,6 @@
+<form action="{% url 'verificar' user.login %}" method="post"></form>
+
+{% csrf_token %}
+<center><fieldset>
+    <center><legend><h1>{{ user.login }}</h1></legend></center>
+</fieldset></center> 

@@ -1,7 +1,7 @@
 {% if user_list %}
     <ul>
     {% for user in user_list %}
-        <li><a href="/MobiCampus/{{ user.login }}/">{{ user.nome }}</a></li>
+        <center><li><a href="{% url 'detail' user.login %}">{{ user.login }}</a></li> </center>
     {% endfor %}
     </ul>
 {% else %}
