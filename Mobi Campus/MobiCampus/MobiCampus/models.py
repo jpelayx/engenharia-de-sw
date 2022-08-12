@@ -8,10 +8,11 @@ max_rota=max_tam_string*3
 
 # Create your models here.
 class Usuario(models.Model):
+    numeros= tuple(range(1,5))
     login=models.CharField(max_length=max_tam_string, primary_key=True)
     nome=models.CharField(max_length=max_tam_string)
     validado=models.BooleanField(default=False)
-    aval=models.IntegerField(default=5)
+    aval=models.SmallIntegerField(default=5, choices=numeros)
     senha=models.CharField(max_length=max_tam_senha)
     
     def __str__(self):
@@ -30,10 +31,15 @@ class Motorista(Usuario):
         return super().__str__()
 
 class Carona(Motorista):
+    numeros= tuple(range(1,4))
     origem=models.CharField(max_length=max_tam_string)
     destino=models.CharField(max_length=max_tam_string)
     rota=models.CharField(max_length=max_rota)
     custo=models.IntegerField()
-    fializada=models.BooleanField(default=False)
+    finalizada=models.BooleanField(default=False)
+    passageiros=models.SmallIntegerField(default=0, choices=numeros)
+
+
+
 
 

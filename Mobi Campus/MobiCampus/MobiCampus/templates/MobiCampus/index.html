@@ -1,9 +1,15 @@
-{% if user_list %}
-    <ul>
-    {% for user in user_list %}
-        <center><li><a href="{% url 'detail' user.login %}">{{ user.login }}</a></li> </center>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>Nenhum usuario disponivel.</p>
-{% endif %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'MobiCampus/style.css' %}">
+
+<center>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit">
+</form>
+</center>
+
+{% if erro %}
+    <center><p style="color: red;">Erro combinacao usuario senha</p></center>
+{%endif %}
