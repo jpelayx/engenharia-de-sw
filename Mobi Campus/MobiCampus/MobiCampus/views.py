@@ -81,6 +81,12 @@ def resultado(request, usuario_login, busca):
     #regex para achar uma rota que contenha a origem e destino nesta ordem
     matcher='[a-zA-Z ,]*'+origem+'[a-zA-Z ,]*'+destino+'[a-zA-Z ,]*'
 
-    caronas=Carona.objects.filter(rota__regex=matcher, passageiros__lt=4)
+    caronas=Carona.objects.filter(rota__regex=matcher, passageiros__lt=4).values()
+
+    template=loader.get_template('MobiCampus/resultados_busca.html')
+
+    contexto={
+        'resultados_list':caronas,
+    }
     
-    return HttpResponse(caronas)
+    return HttpResponse(template.render(contexto, request))

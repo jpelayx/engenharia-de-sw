@@ -1,0 +1,11 @@
+{% if resultados_list%} 
+    <ul>
+        {% for viagem in resultados_list %}
+            <center> 
+                <p> {{viagem.rota}}</p>
+            </center>
+        {% endfor %}
+    </ul>
+{% else %}
+    <center> <p> Sem viagens Disponíveis.</p></center>
+{% endif %}
