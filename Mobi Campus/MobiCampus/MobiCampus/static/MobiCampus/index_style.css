@@ -1,0 +1,25 @@
+li a {
+    color: green;
+}
+
+button {
+    color: rgb(238, 135, 94);
+    width: 200px;
+    height: 50px;
+}
+
+input[type=submit]{
+    border: 0 solid black;
+    border-radius: 5px;
+    height: 20;
+    width: 70;
+    background-color: black;
+    color: wheat;
+
+}
+
+input[type=text]{
+    border: 2px solid black;
+    border-radius: 5px;
+}
+

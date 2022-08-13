@@ -1,6 +1,9 @@
-<form action="{% url 'verificar' user.login %}" method="post"></form>
 
-{% csrf_token %}
-<center><fieldset>
-    <center><legend><h1>{{ user.login }}</h1></legend></center>
-</fieldset></center> 
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'MobiCampus/detail_style.css' %}">
+
+<form id="pressionar" action="{% url 'viagem' user.login %}" method="post">
+    {% csrf_token %}
+    <center><button form="pressionar"> Buscar corrida </button> </center>
+</form>

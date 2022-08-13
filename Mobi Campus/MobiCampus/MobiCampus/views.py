@@ -1,11 +1,12 @@
 from multiprocessing import context
-from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404,get_list_or_404, HttpResponseRedirect
 from django.http import HttpResponse
-from .models import Usuario, Administrador, Motorista
+from .models import Usuario, Administrador, Motorista, Carona
 from django.template import loader
 from django.http import Http404
-from .forms import Autenticacao
+from .forms import Autenticacao, Pedido
 
+#Responsavel pela view da pagina inicial
 def index(request):
     if(request.method=='POST'):
         form=Autenticacao(request.POST)
@@ -14,7 +15,7 @@ def index(request):
             nome=form.cleaned_data['login']
             password=form.cleaned_data['senha']
             user=get_object_or_404(Usuario, pk=nome)
-
+            
             if(user.senha==password):
                 return HttpResponseRedirect(nome)
             else:
@@ -23,9 +24,7 @@ def index(request):
                     'form': form,
                     'erro': True,
                 }
-                return HttpResponse(error.render(contexto, request=request))
-    
-
+                return HttpResponse(error.render(contexto, request))
     else:
         form=Autenticacao()    
     
@@ -37,6 +36,8 @@ def index(request):
 
     return HttpResponse(template.render(contexto, request))
 
+
+#Responsável pela view da pagina do usuario
 def detail(request, usuario_login):
     user=get_object_or_404(Usuario, pk=usuario_login)
     
@@ -47,9 +48,39 @@ def detail(request, usuario_login):
 
     return HttpResponse(template.render(contexto, request))
 
-def results(request, usuario_login):
-    resposta= "Voce esta olhando para o nome do usuario %s"
-    return HttpResponse(resposta % usuario_login)
+#Responsavel pela view da página de um motorista
+def motorista(request, usuario_login):
+    user=get_object_or_404(Usuario, pk=usuario_login)
 
-def verificar(request, usuario_login):
-    return HttpResponse("Voce esta verificando o usuario %s" % usuario_login)
+    return HttpResponse(user.nome)
+
+
+#responsável pela view da página de busca 
+def buscando_viagem(request, usuario_login):
+    if(request.method=='POST'):
+        form=Pedido(request.POST)
+
+        if(form.is_valid()):
+            origem=form.cleaned_data['origem']
+            destino=form.cleaned_data['destino']
+
+            return HttpResponseRedirect(origem+"+"+destino)
+    else:
+        form=Pedido(request.POST)
+    
+    template = loader.get_template('MobiCampus/buscar_viagem.html')
+
+    contexto={
+        'form':form,
+    }
+    return HttpResponse(template.render(contexto, request))
+
+def resultado(request, usuario_login, busca):
+    origem, destino= busca.split('+')
+    
+    #regex para achar uma rota que contenha a origem e destino nesta ordem
+    matcher='[a-zA-Z ,]*'+origem+'[a-zA-Z ,]*'+destino+'[a-zA-Z ,]*'
+
+    caronas=Carona.objects.filter(rota__regex=matcher)
+    
+    return HttpResponse(caronas)
