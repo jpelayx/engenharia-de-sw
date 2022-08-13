@@ -81,6 +81,6 @@ def resultado(request, usuario_login, busca):
     #regex para achar uma rota que contenha a origem e destino nesta ordem
     matcher='[a-zA-Z ,]*'+origem+'[a-zA-Z ,]*'+destino+'[a-zA-Z ,]*'
 
-    caronas=Carona.objects.filter(rota__regex=matcher)
+    caronas=Carona.objects.filter(rota__regex=matcher, passageiros__lt=4)
     
     return HttpResponse(caronas)
